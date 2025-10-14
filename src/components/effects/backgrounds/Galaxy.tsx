@@ -231,7 +231,7 @@ export default function Galaxy({
       gl.clearColor(0, 0, 0, 1);
     }
 
-    let program: Program;
+    const program: Program;
     const resize = () => {
       renderer.setSize(ctn.offsetWidth, ctn.offsetHeight);
       if (program) {

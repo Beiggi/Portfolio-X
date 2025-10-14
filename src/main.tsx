@@ -1,30 +1,30 @@
-// /src/main.tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import App from './App';
-import Home from './pages/Home';
-import About from './pages/About';
-import Projects from './pages/Projects';
-import Contact from './pages/Contact';
-import ProjectDetail from './pages/ProjectDetail';
-import NotFound from './pages/NotFound';
 import './lib/i18n';
 import './styles/global.css';
 
-// Define the routes using the modern object-based approach
+// Importación de componentes de página
+import App from './App.tsx';
+import Home from './pages/Home.tsx';
+import About from './pages/About.tsx';
+import Projects from './pages/Projects.tsx';
+import Contact from './pages/Contact.tsx';
+import ProjectDetail from './pages/ProjectDetail.tsx';
+import NotFound from './pages/NotFound.tsx';
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <NotFound />, // A fallback for errors
+    errorElement: <NotFound />,
     children: [
       { index: true, element: <Home /> },
       { path: 'about', element: <About /> },
       { path: 'projects', element: <Projects /> },
+      { path: 'projects/:projectId', element: <ProjectDetail /> },
       { path: 'contact', element: <Contact /> },
-      { path: 'projects/:slug', element: <ProjectDetail /> },
     ],
   },
 ]);
@@ -32,15 +32,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <HelmetProvider>
-      {/* Use RouterProvider to enable the future flags */}
-      <RouterProvider
-        router={router}
-        future={{
-          // Opt-in to the new features
-          v7_startTransition: true,
-          v7_relativeSplatPath: true,
-        }}
-      />
+      <RouterProvider router={router} />
     </HelmetProvider>
   </React.StrictMode>,
 );

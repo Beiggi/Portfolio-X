@@ -1,77 +1,42 @@
 {
-  "meta": {
-    "home": {
-      "title": "Dereck Lizana - Artista Multidisciplinare e Sviluppatore",
-      "description": "Portfolio di Dereck Lizana, artista multidisciplinare e sviluppatore frontend specializzato in motion graphics, design e IA."
-    },
-    "project": {
-      "titleSuffix": "Caso di Studio del Progetto"
-    }
-  },
   "header": {
     "home": "Home",
-    "about": "Chi Sono",
+    "about": "Chi sono",
     "projects": "Progetti",
     "contact": "Contatti",
-    "cv": "Scarica CV",
-    "letsTalk": "Parliamone"
+    "cv": "Scarica CV"
   },
   "hero": {
-    "title": "Creazione di Esperienze Digitali",
-    "subtitle": "Artista multidisciplinare e architetto software specializzato in prestazioni, accessibilità ed esperienza utente.",
-    "cta": "Parliamone",
-    "scroll": "Scorri per esplorare"
+    "title": "Rinascimento digitale",
+    "subtitle": "Artista multidisciplinare e sviluppatore con sede a Firenze, che fonde l'estetica classica con la tecnologia moderna.",
+    "cta": "Guarda il mio lavoro",
+    "scroll": "Scorri verso il basso"
   },
-  "home": {
-    "projectsTitle": "Lavori in Evidenza"
-  },
-  "project": {
-    "back": "Torna ai progetti",
-    "challenge": "La Sfida",
-    "solution": "La Soluzione",
-    "role": "Il Mio Ruolo",
-    "techStack": "Tecnologie",
-    "timeline": "Durata",
-    "links": "Link"
-  },
-  "footer": {
-    "contact": {
-      "title": "Contattami",
-      "description": "Hai un progetto in mente o vuoi solo salutarmi? Non esitare a scrivermi."
-    },
-    "social": {
-      "title": "Trovami su"
-    },
-    "newsletter": {
-      "title": "Newsletter",
-      "description": "Iscriviti per ricevere aggiornamenti su nuovi progetti e articoli."
-    },
-    "rights": "Tutti i diritti riservati."
+  "projects": {
+    "title": "Lavori selezionati"
   },
   "contact": {
-    "name": "Il Tuo Nome",
-    "email": "La Tua Email",
-    "message": "Il Tuo Messaggio",
-    "send": "Invia Messaggio",
-    "sending": "Invio in corso...",
-    "success": "Messaggio inviato con successo! Ti risponderò presto.",
-    "error": "Si è verificato un errore. Per favore, riprova più tardi.",
-    "errors": {
-      "name": {
-        "min": "Il nome deve contenere almeno 2 caratteri."
-      },
-      "email": {
-        "invalid": "Per favore, inserisci un indirizzo email valido."
-      },
-      "message": {
-        "min": "Il messaggio deve contenere almeno 10 caratteri."
+    "title": "Contattaci",
+    "form": {
+      "name": "Il tuo nome",
+      "email": "La tua email",
+      "message": "Il tuo messaggio",
+      "submit": "Invia messaggio",
+      "sending": "Invio in corso...",
+      "success": "Messaggio inviato con successo! Ti risponderò al più presto.",
+      "failure": "Si è verificato un errore. Riprova più tardi.",
+      "errors": {
+        "name": "Il nome deve contenere almeno 2 caratteri.",
+        "email": "Inserisci un indirizzo email valido.",
+        "message": "Il messaggio deve contenere almeno 10 caratteri."
       }
     }
   },
-  "notFound": {
-    "title": "Pagina Non Trovata",
-    "heading": "Pagina non trovata",
-    "message": "Spiacenti, non siamo riusciti a trovare la pagina che stai cercando.",
-    "goHome": "Torna alla home"
+  "footer": {
+    "copyright": "Tutti i diritti riservati."
+  },
+  "home": {
+    "metaTitle": "Rinascimento digitale | Portfolio",
+    "metaDescription": "Il portfolio ufficiale di un artista e sviluppatore multidisciplinare."
   }
 }

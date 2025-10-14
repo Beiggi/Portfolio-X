@@ -1,77 +1,42 @@
 {
-  "meta": {
-    "home": {
-      "title": "Dereck Lizana - Multidisciplinary Artist & Developer",
-      "description": "Portfolio of Dereck Lizana, a multidisciplinary artist and frontend developer specializing in motion graphics, design, and AI."
-    },
-    "project": {
-      "titleSuffix": "Project Case Study"
-    }
-  },
   "header": {
     "home": "Home",
     "about": "About",
     "projects": "Projects",
     "contact": "Contact",
-    "cv": "Download CV",
-    "letsTalk": "Let's Talk"
+    "cv": "Download CV"
   },
   "hero": {
-    "title": "Crafting Digital Experiences",
-    "subtitle": "Multidisciplinary artist and software architect specializing in performance, accessibility, and user experience.",
-    "cta": "Let's Talk",
-    "scroll": "Scroll to explore"
+    "title": "Digital Renaissance",
+    "subtitle": "Multidisciplinary artist and developer based in Florence, merging classical aesthetics with modern technology.",
+    "cta": "View My Work",
+    "scroll": "Scroll Down"
   },
-  "home": {
-    "projectsTitle": "Featured Work"
-  },
-  "project": {
-    "back": "Back to projects",
-    "challenge": "The Challenge",
-    "solution": "The Solution",
-    "role": "My Role",
-    "techStack": "Tech Stack",
-    "timeline": "Timeline",
-    "links": "Links"
-  },
-  "footer": {
-    "contact": {
-      "title": "Get in touch",
-      "description": "Have a project in mind or just want to say hi? Feel free to reach out."
-    },
-    "social": {
-      "title": "Find me on"
-    },
-    "newsletter": {
-      "title": "Newsletter",
-      "description": "Subscribe for updates on new projects and articles."
-    },
-    "rights": "All rights reserved."
+  "projects": {
+    "title": "Selected Works"
   },
   "contact": {
-    "name": "Your Name",
-    "email": "Your Email",
-    "message": "Your Message",
-    "send": "Send Message",
-    "sending": "Sending...",
-    "success": "Message sent successfully! I'll get back to you soon.",
-    "error": "An error occurred. Please try again later.",
-    "errors": {
-      "name": {
-        "min": "Name must be at least 2 characters."
-      },
-      "email": {
-        "invalid": "Please enter a valid email address."
-      },
-      "message": {
-        "min": "Message must be at least 10 characters."
+    "title": "Get in Touch",
+    "form": {
+      "name": "Your Name",
+      "email": "Your Email",
+      "message": "Your Message",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully! I'll get back to you soon.",
+      "failure": "Something went wrong. Please try again later.",
+      "errors": {
+        "name": "Name must be at least 2 characters.",
+        "email": "Please enter a valid email address.",
+        "message": "Message must be at least 10 characters."
       }
     }
   },
-  "notFound": {
-    "title": "Page Not Found",
-    "heading": "Page not found",
-    "message": "Sorry, we couldn’t find the page you’re looking for.",
-    "goHome": "Go back home"
+  "footer": {
+    "copyright": "All Rights Reserved."
+  },
+  "home": {
+    "metaTitle": "Digital Renaissance | Portfolio",
+    "metaDescription": "The official portfolio of a multidisciplinary artist and developer."
   }
 }

@@ -1,136 +1,85 @@
-// /src/components/effects/interactions/ClickSpark.tsx (VERSIÓN GLOBAL ADAPTADA)
-import { useRef, useEffect, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
-// Las props ahora son opcionales y no incluyen 'children'
-interface ClickSparkProps {
-  sparkColor?: string;
-  sparkSize?: number;
-  sparkRadius?: number;
-  sparkCount?: number;
-  duration?: number;
-  easing?: 'linear' | 'ease-in' | 'ease-out' | 'ease-in-out';
-  extraScale?: number;
-}
+const SPARK_COLOR = 'hsl(308, 100%, 50%)'; // --primary color
 
-interface Spark {
-  x: number;
-  y: number;
-  angle: number;
-  startTime: number;
-}
+const generateSpark = () => {
+  const a = Math.random() * 2 * Math.PI;
+  const r = Math.random();
+  return {
+    x: Math.cos(a) * r,
+    y: Math.sin(a) * r,
+    color: SPARK_COLOR,
+    scale: 1.05,
+    opacity: 1,
+  };
+};
 
-const ClickSpark: React.FC<ClickSparkProps> = ({
-  sparkColor = 'var(--primary)', // Usamos el color primario del tema por defecto
-  sparkSize = 10,
-  sparkRadius = 15,
-  sparkCount = 8,
-  duration = 400,
-  easing = 'ease-out',
-  extraScale = 1.0,
-}) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const sparksRef = useRef<Spark[]>([]);
-
-  const easeFunc = useCallback(
-    (t: number) => {
-      switch (easing) {
-        case 'linear':
-          return t;
-        case 'ease-in':
-          return t * t;
-        case 'ease-in-out':
-          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-        default:
-          return t * (2 - t);
-      }
-    },
-    [easing],
-  );
+const useSparkAnimation = () => {
+  const [sparks, setSparks] = useState<any[]>([]);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Lógica para redimensionar el canvas al tamaño de la ventana
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    let animationFrame: number;
+    const update = () => {
+      setSparks((currentSparks) =>
+        currentSparks
+          .map((spark) => ({
+            ...spark,
+            scale: spark.scale - 0.02,
+            opacity: spark.opacity - 0.02,
+          }))
+          .filter((spark) => spark.opacity > 0)
+      );
+      animationFrame = requestAnimationFrame(update);
     };
-    window.addEventListener('resize', resizeCanvas, false);
-    resizeCanvas();
+    animationFrame = requestAnimationFrame(update);
+    return () => cancelAnimationFrame(animationFrame);
+  }, []);
 
-    // Lógica para manejar el clic a nivel global
+  const createSparks = useCallback((x: number, y: number) => {
+    const newSparks = Array.from({ length: 12 }, generateSpark).map((spark) => ({
+      ...spark,
+      left: x,
+      top: y,
+    }));
+    setSparks((s) => [...s, ...newSparks]);
+  }, []);
+
+  return { sparks, createSparks };
+};
+
+const ClickSpark = () => {
+  const { sparks, createSparks } = useSparkAnimation();
+
+  useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      const x = e.clientX;
-      const y = e.clientY;
-      const now = performance.now();
-      const newSparks: Spark[] = Array.from({ length: sparkCount }, (_, i) => ({
-        x,
-        y,
-        angle: (2 * Math.PI * i) / sparkCount,
-        startTime: now,
-      }));
-      sparksRef.current.push(...newSparks);
+      createSparks(e.clientX, e.clientY);
     };
     window.addEventListener('click', handleClick);
+    return () => window.removeEventListener('click', handleClick);
+  }, [createSparks]);
 
-    // Bucle de animación para dibujar las chispas
-    let animationId: number;
-    const draw = (timestamp: number) => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      sparksRef.current = sparksRef.current.filter((spark: Spark) => {
-        const elapsed = timestamp - spark.startTime;
-        if (elapsed >= duration) return false;
-
-        const progress = elapsed / duration;
-        const eased = easeFunc(progress);
-        const distance = eased * sparkRadius * extraScale;
-        const lineLength = sparkSize * (1 - eased);
-
-        const x1 = spark.x + distance * Math.cos(spark.angle);
-        const y1 = spark.y + distance * Math.sin(spark.angle);
-        const x2 = spark.x + (distance + lineLength) * Math.cos(spark.angle);
-        const y2 = spark.y + (distance + lineLength) * Math.sin(spark.angle);
-
-        ctx.strokeStyle = sparkColor;
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
-
-        return true;
-      });
-
-      animationId = requestAnimationFrame(draw);
-    };
-    animationId = requestAnimationFrame(draw);
-
-    // Función de limpieza
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('click', handleClick);
-    };
-  }, [
-    sparkColor,
-    sparkSize,
-    sparkRadius,
-    sparkCount,
-    duration,
-    easeFunc,
-    extraScale,
-  ]);
-
-  // El componente ahora solo renderiza el canvas, sin envolver a otros elementos
   return (
-    <canvas
-      ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-[9999]"
-    />
+    <>
+      {sparks.map((spark, i) => (
+        <svg
+          key={i}
+          viewBox="0 0 1 1"
+          style={{
+            position: 'fixed',
+            left: spark.left,
+            top: spark.top,
+            width: 25,
+            height: 25,
+            transform: `translate(-50%, -50%) translate(${spark.x * 25}px, ${spark.y * 25}px) scale(${spark.scale})`,
+            opacity: spark.opacity,
+            pointerEvents: 'none',
+            zIndex: 9999,
+          }}
+        >
+          <circle cx="0.5" cy="0.5" r="0.5" fill={spark.color} />
+        </svg>
+      ))}
+    </>
   );
 };
 

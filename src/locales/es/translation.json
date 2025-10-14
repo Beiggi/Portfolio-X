@@ -1,77 +1,42 @@
 {
-  "meta": {
-    "home": {
-      "title": "Dereck Lizana - Artista Multidisciplinar y Desarrollador",
-      "description": "Portfolio de Dereck Lizana, un artista multidisciplinar y desarrollador frontend especializado en motion graphics, diseño e IA."
-    },
-    "project": {
-      "titleSuffix": "Caso de Estudio del Proyecto"
-    }
-  },
   "header": {
     "home": "Inicio",
-    "about": "Sobre Mí",
+    "about": "Sobre mí",
     "projects": "Proyectos",
     "contact": "Contacto",
-    "cv": "Descargar CV",
-    "letsTalk": "Hablemos"
+    "cv": "Descargar CV"
   },
   "hero": {
-    "title": "Creando Experiencias Digitales",
-    "subtitle": "Artista multidisciplinar y arquitecto de software especializado en rendimiento, accesibilidad y experiencia de usuario.",
-    "cta": "Hablemos",
-    "scroll": "Desliza para explorar"
+    "title": "Renacimiento Digital",
+    "subtitle": "Artista multidisciplinar y desarrollador con sede en Florencia, fusionando estética clásica con tecnología moderna.",
+    "cta": "Ver Mi Trabajo",
+    "scroll": "Desliza Hacia Abajo"
   },
-  "home": {
-    "projectsTitle": "Trabajos Destacados"
-  },
-  "project": {
-    "back": "Volver a proyectos",
-    "challenge": "El Reto",
-    "solution": "La Solución",
-    "role": "Mi Rol",
-    "techStack": "Tecnologías",
-    "timeline": "Duración",
-    "links": "Enlaces"
-  },
-  "footer": {
-    "contact": {
-      "title": "Ponte en contacto",
-      "description": "¿Tienes un proyecto en mente o solo quieres saludar? No dudes en escribirme."
-    },
-    "social": {
-      "title": "Encuéntrame en"
-    },
-    "newsletter": {
-      "title": "Newsletter",
-      "description": "Suscríbete para recibir noticias sobre nuevos proyectos y artículos."
-    },
-    "rights": "Todos los derechos reservados."
+  "projects": {
+    "title": "Trabajos Seleccionados"
   },
   "contact": {
-    "name": "Tu Nombre",
-    "email": "Tu Correo Electrónico",
-    "message": "Tu Mensaje",
-    "send": "Enviar Mensaje",
-    "sending": "Enviando...",
-    "success": "¡Mensaje enviado con éxito! Te responderé pronto.",
-    "error": "Ocurrió un error. Por favor, inténtalo de nuevo más tarde.",
-    "errors": {
-      "name": {
-        "min": "El nombre debe tener al menos 2 caracteres."
-      },
-      "email": {
-        "invalid": "Por favor, introduce una dirección de correo válida."
-      },
-      "message": {
-        "min": "El mensaje debe tener al menos 10 caracteres."
+    "title": "Ponte en Contacto",
+    "form": {
+      "name": "Tu Nombre",
+      "email": "Tu Email",
+      "message": "Tu Mensaje",
+      "submit": "Enviar Mensaje",
+      "sending": "Enviando...",
+      "success": "¡Mensaje enviado con éxito! Te responderé pronto.",
+      "failure": "Algo salió mal. Por favor, inténtalo de nuevo más tarde.",
+      "errors": {
+        "name": "El nombre debe tener al menos 2 caracteres.",
+        "email": "Por favor, introduce una dirección de email válida.",
+        "message": "El mensaje debe tener al menos 10 caracteres."
       }
     }
   },
-  "notFound": {
-    "title": "Página no encontrada",
-    "heading": "Página no encontrada",
-    "message": "Lo sentimos, no pudimos encontrar la página que estás buscando.",
-    "goHome": "Volver al inicio"
+  "footer": {
+    "copyright": "Todos los Derechos Reservados."
+  },
+  "home": {
+    "metaTitle": "Renacimiento Digital | Portfolio",
+    "metaDescription": "El portfolio oficial de un artista y desarrollador multidisciplinar."
   }
 }

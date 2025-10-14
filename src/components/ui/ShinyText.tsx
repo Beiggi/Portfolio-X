@@ -1,34 +1,15 @@
-// /src/components/ui/ShinyText.tsx
-import React from 'react';
-
 interface ShinyTextProps {
   text: string;
-  disabled?: boolean;
-  speed?: number;
   className?: string;
 }
 
-const ShinyText: React.FC<ShinyTextProps> = ({
-  text,
-  disabled = false,
-  speed = 5,
-  className = '',
-}) => {
-  const animationDuration = `${speed}s`;
-
+const ShinyText = ({ text, className = '' }: ShinyTextProps) => {
   return (
-    <div
-      className={`inline-block bg-clip-text text-[#b5b5b5a4] ${disabled ? '' : 'animate-shine'} ${className}`}
-      style={{
-        backgroundImage:
-          'linear-gradient(120deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 60%)',
-        backgroundSize: '200% 100%',
-        WebkitBackgroundClip: 'text',
-        animationDuration: animationDuration,
-      }}
+    <span
+      className={`animate-shine bg-[linear-gradient(110deg,transparent,45%,var(--foreground),55%,transparent)] bg-[length:250%_100%] bg-clip-text text-transparent ${className}`}
     >
       {text}
-    </div>
+    </span>
   );
 };
 

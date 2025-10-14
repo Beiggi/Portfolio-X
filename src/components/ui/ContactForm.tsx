@@ -1,130 +1,135 @@
-// /src/components/ui/ContactForm.tsx
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { postContactForm } from '@/lib/api';
-import ShinyBorderButton from '@/components/ui/ShinyBorderButton';
+import { useState } from 'react';
+import ShinyBorderButton from './ShinyBorderButton';
 
 const ContactForm = () => {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [status, setStatus] = useState<
     'idle' | 'loading' | 'success' | 'error'
   >('idle');
 
   const schema = z.object({
-    name: z.string().min(2, t('contact.errors.name.min')),
-    email: z.string().email(t('contact.errors.email.invalid')),
-    message: z.string().min(10, t('contact.errors.message.min')),
+    name: z.string().min(2, t('contact.form.errors.name')),
+    email: z.string().email(t('contact.form.errors.email')),
+    message: z.string().min(10, t('contact.form.errors.message')),
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  type FormData = z.infer<typeof schema>;
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (status === 'loading') return;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  });
+
+  const onSubmit = async (data: FormData) => {
     setStatus('loading');
-    setErrors({});
-
-    const result = schema.safeParse(formData);
-    if (!result.success) {
-      const fieldErrors: { [key: string]: string } = {};
-      result.error.issues.forEach((issue) => {
-        if (typeof issue.path[0] === 'string') {
-          fieldErrors[issue.path[0]] = issue.message;
-        }
-      });
-      setErrors(fieldErrors);
-      setStatus('idle');
-      return;
-    }
-
     try {
-      await postContactForm(result.data);
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
       setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-    } catch {
+      reset();
+    } catch (error) {
+      console.error('Failed to send message:', error);
       setStatus('error');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label htmlFor="name" className="sr-only">
-          {t('contact.name')}
-        </label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          placeholder={t('contact.name')}
-          value={formData.name}
-          onChange={handleChange}
-          className="w-full rounded border border-secondary bg-background p-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-        />
-        {errors.name && (
-          <p className="mt-1 text-sm text-red-500">{errors.name}</p>
-        )}
-      </div>
-      <div>
-        <label htmlFor="email" className="sr-only">
-          {t('contact.email')}
-        </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder={t('contact.email')}
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full rounded border border-secondary bg-background p-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-        />
-        {errors.email && (
-          <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-        )}
-      </div>
-      <div>
-        <label htmlFor="message" className="sr-only">
-          {t('contact.message')}
-        </label>
-        <textarea
-          name="message"
-          id="message"
-          rows={4}
-          placeholder={t('contact.message')}
-          value={formData.message}
-          onChange={handleChange}
-          className="w-full rounded border border-secondary bg-background p-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-        ></textarea>
-        {errors.message && (
-          <p className="mt-1 text-sm text-red-500">{errors.message}</p>
-        )}
-      </div>
-      <div
-        className={status === 'loading' ? 'cursor-not-allowed opacity-50' : ''}
-      >
-        <ShinyBorderButton
-          type="submit"
-          text={status === 'loading' ? t('contact.sending') : t('contact.send')}
-        />
-      </div>
+    <div className="mx-auto max-w-2xl">
+      <h2 className="mb-8 text-center text-4xl font-bold">
+        {t('contact.title')}
+      </h2>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <div>
+          <label
+            htmlFor="name"
+            className="mb-2 block text-sm font-medium text-foreground/80"
+          >
+            {t('contact.form.name')}
+          </label>
+          <input
+            {...register('name')}
+            id="name"
+            className="block w-full rounded-md border-secondary bg-secondary p-3 text-foreground shadow-sm focus:border-primary focus:ring-primary"
+          />
+          {errors.name && (
+            <p className="mt-2 text-sm text-red-500">{errors.name.message}</p>
+          )}
+        </div>
+        <div>
+          <label
+            htmlFor="email"
+            className="mb-2 block text-sm font-medium text-foreground/80"
+          >
+            {t('contact.form.email')}
+          </label>
+          <input
+            {...register('email')}
+            id="email"
+            type="email"
+            className="block w-full rounded-md border-secondary bg-secondary p-3 text-foreground shadow-sm focus:border-primary focus:ring-primary"
+          />
+          {errors.email && (
+            <p className="mt-2 text-sm text-red-500">{errors.email.message}</p>
+          )}
+        </div>
+        <div>
+          <label
+            htmlFor="message"
+            className="mb-2 block text-sm font-medium text-foreground/80"
+          >
+            {t('contact.form.message')}
+          </label>
+          <textarea
+            {...register('message')}
+            id="message"
+            rows={4}
+            className="block w-full rounded-md border-secondary bg-secondary p-3 text-foreground shadow-sm focus:border-primary focus:ring-primary"
+          />
+          {errors.message && (
+            <p className="mt-2 text-sm text-red-500">
+              {errors.message.message}
+            </p>
+          )}
+        </div>
+        <div className="text-center">
+          <ShinyBorderButton
+            type="submit"
+            disabled={status === 'loading'}
+            text={
+              status === 'loading'
+                ? t('contact.form.sending')
+                : t('contact.form.submit')
+            }
+          />
+        </div>
+      </form>
       {status === 'success' && (
-        <p className="text-green-500">{t('contact.success')}</p>
+        <p className="mt-4 text-center text-green-500">
+          {t('contact.form.success')}
+        </p>
       )}
       {status === 'error' && (
-        <p className="text-red-500">{t('contact.error')}</p>
+        <p className="mt-4 text-center text-red-500">
+          {t('contact.form.failure')}
+        </p>
       )}
-    </form>
+    </div>
   );
 };
 

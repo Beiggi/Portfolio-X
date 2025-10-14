@@ -1,4 +1,3 @@
-// /tailwind.config.cjs
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -8,25 +7,18 @@ module.exports = {
         sans: ['Inter', 'sans-serif'],
       },
       colors: {
-        background: '#111111',
-        foreground: '#F0EBE3',
-        primary: '#FF00E5',
-        secondary: '#1D1D1D',
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        primary: 'var(--primary)',
+        secondary: 'var(--secondary)',
       },
       animation: {
-        'infinite-scroll': 'infinite-scroll 25s linear infinite',
-        // --- ANIMACIONES AÑADIDAS ---
-        'star-movement-bottom':
-          'star-movement-bottom linear infinite alternate',
-        'star-movement-top': 'star-movement-top linear infinite alternate',
-        shine: 'shine 5s linear infinite',
+        'star-movement-bottom': 'star-movement-bottom 6s linear infinite',
+        'star-movement-top': 'star-movement-top 6s linear infinite',
+        shine: 'shine 2s linear infinite',
+        'gradient-move': 'gradient-move 15s ease infinite',
       },
       keyframes: {
-        'infinite-scroll': {
-          from: { transform: 'translateX(0)' },
-          to: { transform: 'translateX(-100%)' },
-        },
-        // --- KEYFRAMES AÑADIDOS ---
         'star-movement-bottom': {
           '0%': { transform: 'translate(0%, 0%)', opacity: '1' },
           '100%': { transform: 'translate(-100%, 0%)', opacity: '0' },
@@ -38,6 +30,17 @@ module.exports = {
         shine: {
           '0%': { 'background-position': '100%' },
           '100%': { 'background-position': '-100%' },
+        },
+        'gradient-move': {
+          '0%': {
+            'background-position': '0% 50%',
+          },
+          '50%': {
+            'background-position': '100% 50%',
+          },
+          '100%': {
+            'background-position': '0% 50%',
+          },
         },
       },
     },
