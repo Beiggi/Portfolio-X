@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: http://dereck-lizana.duckdns.org/sitemap.xml

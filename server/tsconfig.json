@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext", // <-- LA CLAVE: Usa la configuración moderna para Node.js
+    "moduleResolution": "NodeNext", // <-- LA CLAVE: Resuelve los módulos como lo hace Node.js
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

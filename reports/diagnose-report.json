@@ -1,0 +1,10 @@
+{
+  "timestamp": "2025-10-13T06:26:33.945Z",
+  "tsErrors": "",
+  "lintErrors": "\nC:\\Users\\Dereck\\Downloads\\Portfolio-X\\src\\components\\effects\\backgrounds\\Galaxy.tsx\n  234:9  error  'program' is never reassigned. Use 'const' instead  prefer-const\n\nC:\\Users\\Dereck\\Downloads\\Portfolio-X\\src\\components\\ui\\StarBorder.tsx\n  28:20  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any\n  31:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any\n\n✖ 3 problems (3 errors, 0 warnings)\n\n",
+  "testResults": "",
+  "buildErrors": "",
+  "auditIssues": "",
+  "unusedDeps": "Unused devDependencies\n* autoprefixer\n* cross-env\n* postcss\n* prettier-plugin-tailwindcss\n* tailwindcss\n* ts-node\nMissing dependencies\n* chalk: .\\scripts\\check-links.ts\n",
+  "brokenLinks": []
+}

@@ -1,0 +1,55 @@
+/* /src/styles/global.css */
+
+/* 1. Font imports always come first. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+
+/* 2. Tailwind directives come after imports. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 3. Custom layers and styles come last. */
+@layer base {
+  :root {
+    --background: #111111;
+    --foreground: #f0ebe3;
+    --primary: #ff00e5;
+    --secondary: #1d1d1d;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    cursor: none;
+  }
+}
+
+/* Animación para el fondo de gradiente */
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Estilos para una scrollbar más estética */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background-color: theme('colors.secondary');
+}
+::-webkit-scrollbar-thumb {
+  background-color: #4a4a4a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
